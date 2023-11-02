@@ -5,10 +5,12 @@ import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 
 export default function Navbar(e) {
-  const cart = useSelector((state) =>state.cart.data)
+  const [show, setShow] = useState();
+  const cart = useSelector((state) => state.cart.data);
+  const userLogin = JSON.parse(localStorage.getItem('userLogin'));
 
-  cart.forEach(data => {
-    console.log(data.qty)
+  cart.forEach((data) => {
+    console.log(data.qty);
   });
   return (
     <nav className="flex justify-between p-5 border-b-4">
@@ -23,16 +25,26 @@ export default function Navbar(e) {
       </form>
 
       <div className="flex">
-        <img src="https://placehold.co/50x50" alt="profile" className="rounded-full mr-2" />
-        <button className="bg-green-500 p-1 rounded font-medium m-2 text-white hover:bg-green-600">
-          <Link to="/login">LOGIN</Link>
-        </button>
-        <div className="m-3">
-          <Link to="/cartshopping">
-            <FontAwesomeIcon icon={faCartShopping} />
-            <span className="border rounded-full p-1 ml-1">{}</span>
-          </Link>
-        </div>
+        {userLogin && (
+          <>
+            <div className="profil ">
+              <Link to="/profile">
+                <img src="https://placehold.co/50x50" alt="profile" className="rounded-full mr-2" />
+              </Link>
+            </div>
+            <div className="m-3">
+              <Link to="/cartshopping">
+                <FontAwesomeIcon icon={faCartShopping} />
+                <span className="border rounded-full p-1 ml-1">{0}</span>
+              </Link>
+            </div>
+          </>
+        )}
+        {!userLogin && (
+          <button className="bg-green-500 p-1 rounded font-medium m-2 text-white hover:bg-green-600">
+            <Link to="/login">LOGIN</Link>
+          </button>
+        )}
       </div>
     </nav>
   );

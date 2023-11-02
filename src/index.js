@@ -9,6 +9,7 @@ import DetailProduct from './pages/products/detailProduct';
 import { Provider } from 'react-redux';
 import { store } from './redux/store';
 import Cart from './pages/cart/detailCart';
+import User from './pages/profile/user';
 
 
 const router = createBrowserRouter([
@@ -32,6 +33,9 @@ const router = createBrowserRouter([
     element: <Cart />
   },{
     path: '/search-product'
+  },{
+    path: '/profile',
+    element: <User />
   }
 ])
 

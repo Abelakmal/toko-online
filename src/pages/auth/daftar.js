@@ -1,8 +1,13 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 const Daftar = () => {
+  useEffect(() =>{
+    if(localStorage.getItem("userLogin")){
+        navigate('/')
+    }
+},[])
   const [daftar ,setDaftar] = useState({
     username: '',
     password: '',

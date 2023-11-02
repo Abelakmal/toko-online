@@ -1,9 +1,14 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate  } from "react-router-dom";
 import Navbar from "../../components/Navbar";
 
 const Login = () =>{
+    useEffect(() =>{
+        if(localStorage.getItem("userLogin")){
+            navigate('/')
+        }
+    },[])
 
     const navigate = useNavigate()
     
@@ -23,7 +28,7 @@ const Login = () =>{
         })
         .then(respone => {
             console.log(respone)
-            localStorage.setItem("key",JSON.stringify(respone))
+            localStorage.setItem("userLogin",JSON.stringify(respone))
                 setError(false)
                 {<Navbar path='login'/>}
                 navigate('/')
