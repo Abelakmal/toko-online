@@ -1,18 +1,15 @@
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
-import { useDispatch } from 'react-redux';
-import { addToCart } from '../redux/slices/test';
 import { Link } from 'react-router-dom';
 
 function Card({ products }) {
-  const dispatch = useDispatch();
 
   return (
     <div className="flex flex-wrap justify-center">
       {products.map((item) => (
-        <Link to={`/product-details/${item.id}`}>
-          <div className="card m-2 border mb-5 rounded shadow-xl hover:border-gray-400" key={item.id}>
+        <Link to={`/product-details/${item.id}`} key={item.id}>
+          <div className="card m-2 border mb-5 rounded shadow-xl hover:border-gray-400" >
             <div className="image">
               <img src={item.image} alt="" className="w-32 h-32" />
             </div>

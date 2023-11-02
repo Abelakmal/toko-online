@@ -2,7 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import cartreducer from "./slices/test"
 
 export const store = configureStore({
-    reducer: {cart : cartreducer},
+    reducer : {cart : cartreducer}
 });
 
 console.log("oncreate store: ", store.getState())

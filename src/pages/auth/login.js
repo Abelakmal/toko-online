@@ -22,6 +22,8 @@ const Login = () =>{
             password : login.password
         })
         .then(respone => {
+            console.log(respone)
+            localStorage.setItem("key",JSON.stringify(respone))
                 setError(false)
                 {<Navbar path='login'/>}
                 navigate('/')

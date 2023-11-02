@@ -4,12 +4,16 @@ import { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import Navbar from '../../components/Navbar';
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../../redux/slices/test';
 
 function DetailProduct() {
   const { id: productId } = useParams();
   const [product, setProduct] = useState({});
   const [popup, setPopup] = useState(false);
   const [opacity, setOpacity] = useState('opacity-100');
+
+  const dispacth = useDispatch()
   useEffect(() => {
     const getProductId = async () => {
       await axios
@@ -31,7 +35,12 @@ function DetailProduct() {
     setPopup(true);
   };
 
-  const back = async() =>{
+  const actionYes = async() =>{
+    dispacth(addToCart({id:Number(productId),qty:1}))
+    setOpacity("opacity-100")
+    setPopup(false)
+  }
+  const actionNo = async() =>{
     setOpacity("opacity-100")
     setPopup(false)
   }
@@ -67,11 +76,11 @@ function DetailProduct() {
             <div className="">
               <button
                 className="border-2 pl-3 pr-3 rounded m-2 bg-green-600"
-                onClick={() => back()}
+                onClick={() => actionYes()}
               >
                 Yes
               </button>
-              <button className="border-2 pl-3 pr-3 rounded" onClick={() => back()}>
+              <button className="border-2 pl-3 pr-3 rounded" onClick={() => actionNo()}>
                 No
               </button>
             </div>

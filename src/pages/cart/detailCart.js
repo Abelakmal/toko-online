@@ -1,8 +1,9 @@
 import React from 'react'
 
 function detailCart() {
+  // const count = useSelector("")
   return (
-    <div>detailCart</div>
+    <div></div>
   )
 }
 

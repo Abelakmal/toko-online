@@ -1,9 +1,15 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartShopping, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
 
 export default function Navbar(e) {
-  console.log(e.path);
+  const cart = useSelector((state) =>state.cart.data)
+
+  cart.forEach(data => {
+    console.log(data.qty)
+  });
   return (
     <nav className="flex justify-between p-5 border-b-4">
       <h1 className="font-black text-xl">
@@ -24,7 +30,7 @@ export default function Navbar(e) {
         <div className="m-3">
           <Link to="/cartshopping">
             <FontAwesomeIcon icon={faCartShopping} />
-            <span className="border rounded-full p-1 ml-1">5</span>
+            <span className="border rounded-full p-1 ml-1">{}</span>
           </Link>
         </div>
       </div>
