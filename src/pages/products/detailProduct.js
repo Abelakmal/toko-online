@@ -9,6 +9,7 @@ function DetailProduct() {
   const { id: productId } = useParams();
   const [product, setProduct] = useState({});
   const [popup, setPopup] = useState(false);
+  const [opacity, setOpacity] = useState('opacity-100');
   useEffect(() => {
     const getProductId = async () => {
       await axios
@@ -26,14 +27,20 @@ function DetailProduct() {
   }, [productId]);
 
   const showPopUp = () => {
-    setPopup(true)
+    setOpacity('opacity-50');
+    setPopup(true);
   };
+
+  const back = async() =>{
+    setOpacity("opacity-100")
+    setPopup(false)
+  }
 
   return (
     <>
       <Navbar />
-      <div className="flex justify-center items-center" style={{ height: 600 }}>
-        <div className="grid  grid-flow-col border-2 border-black">
+      <div className="flex justify-center items-center " style={{ height: 600 }}>
+        <div className={`grid  grid-flow-col border-2 border-black ${opacity}`}>
           <div className="image row-span-3 border p-6">
             <img src={product.image} alt="" className="w-96 h-96" />
           </div>
@@ -55,11 +62,18 @@ function DetailProduct() {
           </div>
         </div>
         {popup && (
-        <div className="popup absolute border-2 bg-white w-96 h-52 p-2 flex flex-col items-center justify-center border-black rounded">
+          <div className="popup absolute border-2 bg-white w-96 h-52 p-2 flex flex-col items-center justify-center border-black rounded opacity-100">
             <div>Apa anda yakin ingin menambahkan ke cart?</div>
             <div className="">
-              <button className="border-2 pl-3 pr-3 rounded m-2 bg-green-600">Yes</button>
-              <button className="border-2 pl-3 pr-3 rounded" onClick={() => setPopup(false)}>No</button>
+              <button
+                className="border-2 pl-3 pr-3 rounded m-2 bg-green-600"
+                onClick={() => back()}
+              >
+                Yes
+              </button>
+              <button className="border-2 pl-3 pr-3 rounded" onClick={() => back()}>
+                No
+              </button>
             </div>
           </div>
         )}
