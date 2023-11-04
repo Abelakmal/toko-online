@@ -42,7 +42,7 @@ const Login = () =>{
         <div className="h-screen flex justify-center items-center">
             <div className=" border border-sky-500 h-1/2 w-80 p-4 rounded">
             <h1 className="font-bold text-3xl">LOGIN</h1>
-            {error ? <div className="border-2 border-red-600 p-2 mt-2"><span>username/password salah</span></div>: <div></div>}
+            {error && <div className="border-2 border-red-600 p-2 mt-2"><span>username/password salah</span></div>}
             <form onSubmit={handleSubmit} method="POST" className="flex flex-col">
                 <label htmlFor="username" className="mt-6">Username</label>
                 <input onChange={handleLogin} type="text" name="username" id="username" className="border-2 rounded p-1 border-black" required/>
