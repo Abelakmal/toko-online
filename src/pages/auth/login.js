@@ -1,16 +1,15 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link, useNavigate  } from "react-router-dom";
-import Navbar from "../../components/Navbar";
 
 const Login = () =>{
+    const navigate = useNavigate()
     useEffect(() =>{
         if(localStorage.getItem("userLogin")){
             navigate('/')
         }
-    },[])
+    },[navigate])
 
-    const navigate = useNavigate()
     
     const [login, setLogin] = useState({
         username: '',
@@ -30,7 +29,6 @@ const Login = () =>{
             console.log(respone)
             localStorage.setItem("userLogin",JSON.stringify(respone))
                 setError(false)
-                {<Navbar path='login'/>}
                 navigate('/')
         })
         .catch(err =>{

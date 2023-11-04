@@ -5,12 +5,13 @@ import { Link, useNavigate } from 'react-router-dom';
 const Daftar = () => {
   const [isSame, setIsSame] = useState(false);
   const [error,setError] = useState()
+  const navigate = useNavigate();
   console.log(error)
   useEffect(() => {
     if (localStorage.getItem('userLogin')) {
       navigate('/');
     }
-  }, []);
+  }, [navigate]);
   const [daftar, setDaftar] = useState({
     username: '',
     confrimPassword: '',
@@ -18,7 +19,6 @@ const Daftar = () => {
     nama: '',
     email: '',
   });
-  const navigate = useNavigate();
   const handleDaftar = (e) => {
     setDaftar({ ...daftar, [e.target.name]: e.target.value });
   };
@@ -50,7 +50,9 @@ const Daftar = () => {
       <div className="h-screen flex justify-center items-center">
         <div className=" border border-sky-500 h-auto w-80 p-4 rounded">
           <h1 className="font-bold text-3xl">DAFTAR</h1>
+          { error &&
           <div className='border-2 border-red-600 p-2 mt-2'>{error?.username || error?.password}</div>
+          }
           <form onSubmit={handleSubmit} method="POST" className="flex flex-col">
             <label htmlFor="name" className="mt-6">
               Name

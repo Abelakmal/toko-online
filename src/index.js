@@ -11,9 +11,14 @@ import { store } from './redux/store';
 import Cart from './pages/cart/detailCart';
 import User from './pages/profile/user';
 import SearchProduct from './pages/products/searchProduct';
+import NotFound from './pages/404/NotFound';
 
 
 const router = createBrowserRouter([
+  {
+    path: "*",
+    element: <NotFound />
+  },
   {
     path: '/',
     element: <App />

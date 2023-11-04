@@ -2,10 +2,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartShopping, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { useEffect, useState } from 'react';
 
-export default function Navbar(e) {
-  const [show, setShow] = useState();
+export default function Navbar() {
   const cart = useSelector((state) => state.cart.data);
   const userLogin = JSON.parse(localStorage.getItem('userLogin'));
 
@@ -29,7 +27,7 @@ export default function Navbar(e) {
           <>
             <div className="profil ">
               <Link to="/profile">
-                <img src="https://placehold.co/50x50" alt="profile" className="rounded-full mr-2" />
+                <img src="https://sman93jkt.sch.id/wp-content/uploads/2018/01/765-default-avatar.png" style={{width: 50, height: 50}} alt="profile" className="border-2 rounded-full mr-2" />
               </Link>
             </div>
             <div className="m-3">
