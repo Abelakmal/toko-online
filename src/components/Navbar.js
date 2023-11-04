@@ -11,6 +11,7 @@ export default function Navbar() {
   useEffect(() =>{
     setQuantity(cart)
   },[cart])
+  const image = localStorage.getItem("image")
 
   return (
     <nav className="flex justify-between p-5 border-b-4">
@@ -29,7 +30,7 @@ export default function Navbar() {
           <>
             <div className="profil ">
               <Link to="/profile">
-                <img src="https://sman93jkt.sch.id/wp-content/uploads/2018/01/765-default-avatar.png" style={{ width: 50, height: 50 }} alt="profile" className="border-2 rounded-full mr-2" />
+                <img src={`${image}`} style={{ width: 50, height: 50 }} alt="profile" className="border-2 rounded-full mr-2" />
               </Link>
             </div>
             <div className="m-3">
