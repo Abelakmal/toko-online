@@ -36,6 +36,7 @@ const Daftar = () => {
         .then((respone) => {
           console.log(respone);
           if (respone.status === 200) {
+            localStorage.setItem("userLogin",JSON.stringify(respone))
             navigate('/');
           }
         })
