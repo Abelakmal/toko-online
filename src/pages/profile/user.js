@@ -1,32 +1,44 @@
-import axios from 'axios';
-import React from 'react';
+import React, { useEffect } from 'react';
+import Kembali from '../../components/Kembali';
+import { useNavigate } from 'react-router-dom';
 
-export default function user() {
+export default function User() {
   const dataUser = JSON.parse(localStorage.getItem('userLogin'));
-  setTimeout(() => {
-    axios
-      .post('http://localhost:8080/auth/refreshToken', {
-        refreshToken: dataUser.data.refreshToken,
-      })
-      .then((respone) => {
-        localStorage.setItem('userLogin', JSON.parse(respone));
-      });
-  }, 1000 * 60);
-  console.log(dataUser)
-  const getUser = () => {
-    axios.get(`http://localhost:8080/api/penggunas/`,);
-  };
+  const Navigate = useNavigate();
+  useEffect(() => {
+    if (!dataUser) {
+      Navigate('/');
+    }
+  }, [dataUser, Navigate]);
+
+  const handleLogout = () =>{
+    localStorage.removeItem('userLogin')
+    Navigate("/login")
+  }
   return (
-    <div className="flex h-screen justify-center ">
-      <div className="border-x-2 border-black w-2/3">
-        <div className="grid grid-rows-3 grid-flow-col gap-4">
-          <div className="row-span-3 ...">
-            <img src="https://placehold.co/400x500" alt="" />
+    <>
+      <Kembali />
+      <div className="flex h-screen justify-center bg-slate-500">
+        <div className="w-2/3 bg-slate-800 rounded">
+          <div className="grid grid-rows-3 grid-flow-col gap-4 ">
+            <div className="row-span-3 ... ">
+              <img src="https://sman93jkt.sch.id/wp-content/uploads/2018/01/765-default-avatar.png" alt="" className="rounded" />
+            </div>
+            <div className="col-span-2 text-white">
+              <h1 className="font-bold text-xl mb-7">PROFILE</h1>
+              <div className="username ">
+                Username : <span className="ml-4 ">{dataUser?.data.username}</span>
+              </div>
+              <div className="email">
+                Email <span className="ml-8">:</span> <span className="ml-4">{dataUser?.data.email}</span>
+              </div>
+            </div>
+            <div className="col-span-3">
+              <button className="bg-green-500 p-1 rounded font-medium m-2 text-white hover:bg-green-600" onClick={() => handleLogout()}>LOGOUT</button>
+            </div>
           </div>
-          <div className="col-span-2 ...">02</div>
-          <div className="row-span-2 col-span-2 ...">03</div>
         </div>
       </div>
-    </div>
+    </>
   );
 }

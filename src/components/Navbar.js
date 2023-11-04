@@ -18,7 +18,7 @@ export default function Navbar(e) {
         <Link to="/">Toko Online</Link>
       </h1>
       <form action="/search-product" method="get">
-        <input className="outline-green-700 border-4 border-green-700 h-9 w-96 p-2 rounded-l-lg" type="search" id="search" placeholder="Serch..." />
+        <input className="outline-green-700 border-4 border-green-700 h-9 w-96 p-2 rounded-l-lg"name='search' type="input" id="search" placeholder="Serch..." />
         <button className="text-white  bg-green-700 px-2 text-lg h-9 rounded-r-lg">
           <FontAwesomeIcon icon={faMagnifyingGlass} />
         </button>
@@ -38,6 +38,7 @@ export default function Navbar(e) {
                 <span className="border rounded-full p-1 ml-1">{0}</span>
               </Link>
             </div>
+            
           </>
         )}
         {!userLogin && (
