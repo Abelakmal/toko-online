@@ -22,8 +22,7 @@ export default function Produk() {
   };
 
   return (
-    <section className="products-view ">
-      <div className="border"></div>
+    <section className="products-view border-t-4 border-green-600 p-2">
       <Card products={products} />
     </section>
   );

@@ -10,7 +10,7 @@ function Card({ products }) {
     <div className="flex flex-wrap justify-center">
       {products.map((item,index) => (
         <Link to={`/product-details/${item.id}`} key={item.id}>
-          <div className="card m-2 border mb-5 rounded shadow-xl hover:border-gray-400" >
+          <div className="card m-2 border mb-5 rounded shadow-lg hover:border-gray-400" >
             <div className="image">
               <img src={item.image} alt="" className="w-32 h-32" />
             </div>
