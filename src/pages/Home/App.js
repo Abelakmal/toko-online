@@ -4,9 +4,9 @@ import Produk from '../../components/Produk';
 import Footer from '../../components/Footer';
 
 function App() {
-  setTimeout(() =>{
-    localStorage.removeItem("userLogin")
-  },1000 * 60)
+  // setTimeout(() =>{
+  //   localStorage.removeItem("userLogin")
+  // },1000 * 60)
   return (
     <>
       <Navbar />

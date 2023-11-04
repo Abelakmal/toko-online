@@ -5,15 +5,17 @@ import { Link } from 'react-router-dom';
 
 function Card({ products }) {
 
+
   return (
     <div className="flex flex-wrap justify-center">
-      {products.map((item) => (
+      {products.map((item,index) => (
         <Link to={`/product-details/${item.id}`} key={item.id}>
           <div className="card m-2 border mb-5 rounded shadow-xl hover:border-gray-400" >
             <div className="image">
               <img src={item.image} alt="" className="w-32 h-32" />
             </div>
             <div className="deskripsi">
+              <div>{index}</div>
               <div className="title w-48 m-2 font-medium">{item.title}</div>
               <div className="price font-bold m-2">${item.price}</div>
               <div className="rating m-2">
@@ -22,6 +24,7 @@ function Card({ products }) {
             </div>
           </div>
         </Link>
+        
       ))}
     </div>
   );
