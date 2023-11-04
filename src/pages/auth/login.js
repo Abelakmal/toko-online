@@ -26,7 +26,6 @@ const Login = () =>{
             password : login.password
         })
         .then(respone => {
-            console.log(respone)
             localStorage.setItem("userLogin",JSON.stringify(respone))
                 setError(false)
                 navigate('/')
