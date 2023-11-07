@@ -52,8 +52,7 @@ export default function User() {
       },
     });
     axiosInstance
-      .put(`api/penggunas`, {
-        id: tempUser.id,
+      .patch(`api/penggunas/${tempUser.id}`, {
         nama: tempUser.nama,
         email: tempUser.email,
         image: tempUser.image,
