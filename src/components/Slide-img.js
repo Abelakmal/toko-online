@@ -9,7 +9,6 @@ export default function SlideImg() {
   const [index, setIndex] = useState(0);
   const img = [img1, img2, img3, img4];
 
-  console.log(img1);
   useEffect(() => {
     const interval = setInterval(() => {
       setIndex((prevIndex) => (prevIndex + 1) % img.length);

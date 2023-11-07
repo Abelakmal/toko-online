@@ -34,10 +34,16 @@ const Daftar = () => {
           email: daftar.email,
         })
         .then((respone) => {
-          console.log(respone);
+          console.log(respone)
           if (respone.status === 200) {
-            localStorage.setItem("userLogin",JSON.stringify(respone))
+          axios.post('http://localhost:8080/auth/signin',{
+            username: daftar.username,
+            password: daftar.createPassword
+          }).then((token =>{
+            localStorage.setItem("userLogin",JSON.stringify(token))
             navigate('/');
+
+          }))
           }
         })
         .catch((err) => setError(err.response.data));

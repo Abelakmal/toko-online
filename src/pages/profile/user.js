@@ -13,7 +13,6 @@ export default function User() {
   const Navigate = useNavigate();
   const jwtToken = `Bearer ${data?.token}`;
   const jwtRefreshToken = `${data?.refreshToken}`;
-
   localStorage.setItem('image', dataUser?.image);
 
   useEffect(() => {
@@ -42,7 +41,7 @@ export default function User() {
     if (!data) {
       Navigate('/');
     }
-  }, []);
+  }, [jwtToken]);
 
   const handleUpdate = () => {
     const axiosInstance = axios.create({
@@ -79,7 +78,13 @@ export default function User() {
         <div className="w-2/3 bg-slate-800 rounded">
           <div className="grid grid-rows-3 grid-flow-col gap-4 ">
             <div className="row-span-3 ... ">
-              <img src={`${dataUser?.image}`} alt="" className="rounded" />
+              {dataUser?.image !== null ? (
+                <img src={`${dataUser?.image}` || 'https://placehold.co/400x300'} alt="" className="rounded" />
+              ) : (
+                <>
+                  <img src="https://placehold.co/400x300" alt="default" />
+                </>
+              )}
             </div>
             <div className="col-span-2 text-white">
               <h1 className="font-bold text-xl mb-7">PROFILE</h1>

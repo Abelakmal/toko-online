@@ -13,6 +13,7 @@ export default function Navbar() {
   },[cart])
   const image = localStorage.getItem("image")
 
+
   return (
     <nav className="flex justify-between p-5 border-b-4">
       <h1 className="font-black text-xl">
