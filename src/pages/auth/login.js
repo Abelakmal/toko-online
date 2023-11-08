@@ -19,20 +19,33 @@ const Login = () =>{
     const handleLogin = (e) => {
         setLogin({...login, [e.target.name]: e.target.value})
     }
-    const handleSubmit = (e) =>{
+    const handleSubmit = async (e) =>{
         e.preventDefault();
-        axios.post('http://localhost:8080/auth/signin', {
-            username : login.username,
-            password : login.password
-        })
-        .then(respone => {
-            localStorage.setItem("userLogin",JSON.stringify(respone))
-                setError(false)
-                navigate('/')
-        })
-        .catch(err =>{
+        try{
+          const {data} =  await axios.post('http://localhost:8080/auth/signin', {
+                username : login.username,
+                password : login.password
+            })
+            console.log(data)
+            localStorage.setItem("userLogin", JSON.stringify(data))
+            setError(false)
+            navigate('/')
+        }catch(e){
+            console.log(e)
             setError(true)
-        })
+        }
+        // axios.post('http://localhost:8080/auth/signin', {
+        //     username : login.username,
+        //     password : login.password
+        // })
+        // .then(respone => {
+        //     localStorage.setItem("userLogin",JSON.stringify(respone))
+        //         setError(false)
+        //         navigate('/')
+        // })
+        // .catch(err =>{
+        //     setError(true)
+        // })
     }
 
     return(

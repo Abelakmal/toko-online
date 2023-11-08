@@ -9,11 +9,12 @@ export default function User() {
   const [dataUser, setDataUser] = useState();
   const [isEdit, setIsEdit] = useState(false);
   const [tempUser, setTempUser] = useState();
-  const { data } = JSON.parse(localStorage.getItem('userLogin'));
+  const data = JSON.parse(localStorage.getItem('userLogin'));
   const Navigate = useNavigate();
   const jwtToken = `Bearer ${data?.token}`;
   const jwtRefreshToken = `${data?.refreshToken}`;
   localStorage.setItem('image', dataUser?.image);
+
 
   useEffect(() => {
     const axiosInstance = axios.create({

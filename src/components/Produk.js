@@ -4,13 +4,15 @@ import Card from './card';
 
 export default function Produk() {
   const [products, setProducts] = useState([]);
-  const [view, setView] = useState(0);
+  const [view, setView] = useState(0)
 
   const getData = async () => {
-    await axios
-      .get('https://fakestoreapi.com/products')
-      .then((product) => setProducts(product.data))
-      .catch((e) => console.log(e));
+    try{
+      const {data} = await axios.get('https://fakestoreapi.com/products')
+      setProducts(data)
+    }catch(e){
+      console.log(e)
+    }
   };
 
   useEffect(() => {
