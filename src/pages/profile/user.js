@@ -15,7 +15,6 @@ export default function User() {
   const jwtRefreshToken = `${data?.refreshToken}`;
   localStorage.setItem('image', dataUser?.image);
 
-
   useEffect(() => {
     const axiosInstance = axios.create({
       baseURL: apiUrl,
@@ -44,28 +43,28 @@ export default function User() {
     }
   }, [jwtToken]);
 
-  const handleUpdate = () => {
-    const axiosInstance = axios.create({
-      baseURL: apiUrl,
-      headers: {
-        Authorization: jwtToken,
-      },
-    });
-    axiosInstance
-      .patch(`api/penggunas/${tempUser.id}`, {
+  const handleUpdate = async () => {
+    try {
+      const axiosInstance = await axios.create({
+        baseURL: apiUrl,
+        headers: {
+          Authorization: jwtToken,
+        },
+      });
+
+      const { data } = await axiosInstance.patch(`api/penggunas/${tempUser.id}`, {
         nama: tempUser.nama,
         email: tempUser.email,
         image: tempUser.image,
         alamat: tempUser.alamat,
         nomorHp: tempUser.nomorHp,
-      })
-      .then((response) => {
-        setDataUser(response.data);
-        setTempUser(response.data);
-      })
-      .catch((e) => {
-        localStorage.setItem('error', e);
       });
+      setDataUser(data);
+      setTempUser(data);
+    } catch (e) {
+      console.log(e);
+      localStorage.setItem('error', e);
+    }
   };
 
   const handleLogout = () => {
