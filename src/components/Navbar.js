@@ -3,16 +3,44 @@ import { faCartShopping, faMagnifyingGlass } from '@fortawesome/free-solid-svg-i
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
+import axios from 'axios';
+
+const apiUrl = 'http://localhost:8080';
 
 export default function Navbar() {
   const cart = useSelector((state) => state.cart.data);
   const [quantity, setQuantity] = useState(0);
+  const [image, setImage] = useState();
   const userLogin = JSON.parse(localStorage.getItem('userLogin'));
-  useEffect(() =>{
-    setQuantity(cart)
-  },[cart])
-  const image = localStorage.getItem("image")
+  useEffect(() => {
+    setQuantity(cart);
+    if (userLogin) {
+      getImageProfile();
+    }
+  }, [cart]);
 
+  const getImageProfile = async () => {
+    try {
+      const jwtToken = `Bearer ${userLogin?.token}`;
+      const axiosInstance = axios.create({
+        baseURL: apiUrl,
+        headers: {
+          Authorization: jwtToken,
+        },
+      });
+      console.log(userLogin?.username);
+
+      const { data } = await axiosInstance.get(`/api/penggunas/${userLogin?.username}`);
+      setImage(data.image);
+    } catch (e) {
+      const jwtRefreshToken = `${userLogin?.refreshToken}`;
+      const { data } = await axios.post('http://localhost:8080/auth/refreshToken', {
+        refreshToken: jwtRefreshToken,
+      });
+      localStorage.setItem('userLogin', JSON.stringify(data));
+      console.log(e);
+    }
+  };
 
   return (
     <nav className="flex justify-between p-5 border-b-4">

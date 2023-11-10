@@ -9,43 +9,43 @@ export default function User() {
   const [dataUser, setDataUser] = useState();
   const [isEdit, setIsEdit] = useState(false);
   const [tempUser, setTempUser] = useState();
-  const data = JSON.parse(localStorage.getItem('userLogin'));
+  const dataLogin = JSON.parse(localStorage.getItem('userLogin'));
   const Navigate = useNavigate();
-  const jwtToken = `Bearer ${data?.token}`;
-  const jwtRefreshToken = `${data?.refreshToken}`;
+  const jwtToken = `Bearer ${dataLogin?.token}`;
+  const jwtRefreshToken = `${dataLogin?.refreshToken}`;
   localStorage.setItem('image', dataUser?.image);
-
+  // console.log(Navigate())
   useEffect(() => {
-    const axiosInstance = axios.create({
-      baseURL: apiUrl,
-      headers: {
-        Authorization: jwtToken,
-      },
-    });
-    axiosInstance
-      .get(`/api/penggunas/${data.username}`)
-      .then((respone) => {
-        setDataUser(respone.data);
-        setTempUser(respone.data);
-      })
-      .catch((e) => {
-        axios
-          .post('http://localhost:8080/auth/refreshToken', {
-            refreshToken: jwtRefreshToken,
-          })
-          .then((response) => {
-            localStorage.setItem('userLogin', JSON.stringify(response));
-          });
-      });
-
-    if (!data) {
+    if (dataLogin === null) {
       Navigate('/');
+    } else {
+      getDataUser()
     }
-  }, [jwtToken]);
+  }, []);
+
+  const getDataUser = async () => {
+    try {
+      const axiosInstance = axios.create({
+        baseURL: apiUrl,
+        headers: {
+          Authorization: `Bearer ${dataLogin?.token}`,
+        },
+      });
+      const { data } = await axiosInstance.get(`/api/penggunas/${dataLogin.username}`);
+      setDataUser(data);
+      setTempUser(data);
+    } catch (e) {
+      console.log(e);
+      const { data } = await axios.post('http://localhost:8080/auth/refreshToken', {
+        refreshToken: jwtRefreshToken,
+      });
+      localStorage.setItem('userLogin', JSON.stringify(data));
+    }
+  };
 
   const handleUpdate = async () => {
     try {
-      const axiosInstance = await axios.create({
+      const axiosInstance = axios.create({
         baseURL: apiUrl,
         headers: {
           Authorization: jwtToken,
