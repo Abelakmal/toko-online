@@ -28,7 +28,7 @@ export default function Navbar() {
           Authorization: jwtToken,
         },
       });
-      console.log(userLogin?.username);
+
 
       const { data } = await axiosInstance.get(`/api/penggunas/${userLogin?.username}`);
       setImage(data.image);

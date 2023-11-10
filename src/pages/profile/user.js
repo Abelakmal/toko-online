@@ -36,6 +36,10 @@ export default function User() {
       setTempUser(data);
     } catch (e) {
       console.log(e);
+      if(e.response.status === 401){
+        localStorage.removeItem('userLogin')
+        Navigate('/')
+      }
       const { data } = await axios.post('http://localhost:8080/auth/refreshToken', {
         refreshToken: jwtRefreshToken,
       });
