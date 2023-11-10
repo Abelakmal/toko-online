@@ -1,23 +1,23 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartShopping, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 const apiUrl = 'http://localhost:8080';
 
 export default function Navbar() {
-  const cart = useSelector((state) => state.cart.data);
   const [quantity, setQuantity] = useState(0);
   const [image, setImage] = useState();
   const userLogin = JSON.parse(localStorage.getItem('userLogin'));
   useEffect(() => {
-    setQuantity(cart);
     if (userLogin) {
+      let qtyCart = JSON.parse(localStorage.getItem('cart'));
+      let resultCal = qtyCart.reduce((a, b) => a + b.qty, 0);
+      setQuantity(resultCal)
       getImageProfile();
     }
-  }, [cart]);
+  }, []);
 
   const getImageProfile = async () => {
     try {
@@ -65,7 +65,7 @@ export default function Navbar() {
             <div className="m-3">
               <Link to="/cartshopping">
                 <FontAwesomeIcon icon={faCartShopping} />
-                <span className="border rounded-full p-1 ml-1">{0}</span>
+                <span className="border rounded-full p-1 ml-1">{quantity}</span>
               </Link>
             </div>
           </>

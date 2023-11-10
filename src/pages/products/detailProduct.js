@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import Navbar from '../../components/Navbar';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addToCart } from '../../redux/slices/test';
 import Kembali from '../../components/Kembali';
 
@@ -13,9 +13,13 @@ function DetailProduct() {
   const [product, setProduct] = useState({});
   const [popup, setPopup] = useState(false);
   const [opacity, setOpacity] = useState('opacity-100');
+  const cart = useSelector((state) => state.cart.data);
   const dispacth = useDispatch();
   const userLogin = JSON.parse(localStorage.getItem('userLogin'));
   useEffect(() => {
+    if(cart.length > 0){
+      localStorage.setItem('cart',JSON.stringify(cart))
+    }
     const getProductId = async () => {
       await axios
         .get(`https://fakestoreapi.com/products/${productId}`)
@@ -29,7 +33,8 @@ function DetailProduct() {
     if (productId) {
       getProductId();
     }
-  }, [productId]);
+  }, [productId,cart]);
+
 
   const showPopUp = () => {
     setOpacity('opacity-50');
@@ -37,7 +42,7 @@ function DetailProduct() {
   };
 
   const actionYes = async () => {
-    dispacth(addToCart({ id: Number(productId), qty: 1 }));
+    dispacth(addToCart({ id: productId, qty: 1 }));
     setOpacity('opacity-100');
     setPopup(false);
   };
