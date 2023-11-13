@@ -51,10 +51,15 @@ function DetailProduct() {
     setPopup(false);
   };
 
+  const props = {
+    directory: product.title,
+    color: "white"
+  }
+
   return (
     <>
       <Navbar />
-      <Kembali />
+      <Kembali {...props}/>
       <div className="flex justify-center items-center " style={{ height: 600 }}>
         <div className={`grid  grid-flow-col border-2 border-black ${opacity}`}>
           <div className="image row-span-3 border p-6">

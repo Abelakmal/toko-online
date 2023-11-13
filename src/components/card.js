@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 
 function Card({ products }) {
 
-console.log(products)
 
   return (
     <div className="flex flex-wrap justify-center">

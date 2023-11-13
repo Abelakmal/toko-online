@@ -39,8 +39,7 @@ export default function Produk() {
     const data = products.sort((a, b) => b.rating.rate - b.rating.rate)
     setView(data)
   }
-  // console.log("ini sort",sort);
-  // console.log("ini product",products);
+
 
   return (
     <div>

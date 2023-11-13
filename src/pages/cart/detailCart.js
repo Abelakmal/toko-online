@@ -60,10 +60,15 @@ function DetailCart() {
     }
   }
 
+  const props = {
+    directory: "Cart",
+    color: "white"
+  }
+
   return (
     <div>
       <Navbar />
-      <Kembali />
+      <Kembali {...props}/>
       <div className="flex mt-14">
         <div className="border-2  w-2/3 rounded">
           { isHave ?

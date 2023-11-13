@@ -75,9 +75,13 @@ export default function User() {
     localStorage.removeItem('userLogin');
     Navigate('/login');
   };
+  let props = {
+    directory: dataUser?.nama,
+    color: "white"
+  }
   return (
     <>
-      <Kembali />
+      <Kembali {...props} />
       <div className="flex h-screen justify-center bg-slate-500">
         <div className="w-2/3 bg-slate-800 rounded">
           <div className="grid grid-rows-3 grid-flow-col gap-4 ">
