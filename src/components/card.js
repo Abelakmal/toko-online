@@ -12,7 +12,7 @@ function Card({ products }) {
         <Link to={`/product-details/${item.id}`} key={item.id}>
           <div className="card m-2 border mb-5 rounded shadow-lg hover:border-gray-400" >
             <div className="image">
-              <img src={item.image} alt="" className="w-32 h-32" />
+              <img src={item.image} alt="" className="w-32 h-32 object-cover" />
             </div>
             <div className="deskripsi">
               <div className="title w-48 m-2 font-medium">{item.title}</div>
