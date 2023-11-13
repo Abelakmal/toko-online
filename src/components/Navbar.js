@@ -13,8 +13,10 @@ export default function Navbar() {
   useEffect(() => {
     if (userLogin) {
       let qtyCart = JSON.parse(localStorage.getItem('cart'));
-      let resultCal = qtyCart.reduce((a, b) => a + b.qty, 0);
-      setQuantity(resultCal)
+      if(qtyCart){
+        let resultCal = qtyCart?.reduce((a, b) => a + b?.qty, 0);
+        setQuantity(resultCal)
+      }
       getImageProfile();
     }
   }, []);

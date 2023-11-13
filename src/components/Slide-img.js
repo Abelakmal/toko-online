@@ -21,8 +21,8 @@ export default function SlideImg() {
 
   return (
     <div className="slides-img flex mb-9 justify-center">
-      <div className='border-2 m-2 rounded'>
-        <img src={img[index]} alt={`img${index}`} style={{ height: 600, width: 700 }}  className='border-2 rounded' />
+      <div className='w-full bg-black'>
+        <img src={img[index]} alt={`img${index}`} style={{ height: 500}}  className='border-2 rounded w-full' />
       </div>
     </div>
   );

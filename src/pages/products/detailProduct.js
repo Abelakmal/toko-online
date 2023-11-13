@@ -17,7 +17,7 @@ function DetailProduct() {
   const dispacth = useDispatch();
   const userLogin = JSON.parse(localStorage.getItem('userLogin'));
   useEffect(() => {
-    if(cart.length > 0){
+    if(cart?.length > 0){
       localStorage.setItem('cart',JSON.stringify(cart))
     }
     const getProductId = async () => {
